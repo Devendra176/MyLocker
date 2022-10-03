@@ -1,5 +1,4 @@
 import re
-
 from datetime import datetime, timezone
 
 from django.db import transaction
@@ -8,9 +7,13 @@ from django.contrib.auth.hashers import make_password, check_password
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import UserDetailsSerializer
-from .models import CustomUser, UserProfile
+
+from users.models import CustomUser, UserProfile
+
 
 Pattern = re.compile("(0|91)?[6-9][0-9]{9}$")
+
+
 
 class CustomRegisterSerializer(RegisterSerializer):
     phone = serializers.CharField(max_length=30)
@@ -48,8 +51,7 @@ class PhoneRegisterSerializer(serializers.ModelSerializer):
             user.save()
         return user
 
-    
-    
+
 
 class OtpVerificationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -86,14 +88,14 @@ class OtpVerificationSerializer(serializers.ModelSerializer):
         instance.mobile_verified = mobile_verified
         instance.save()
         return instance
-    
 
-    # Define transaction.atomic to rollback the save operation in case of error
 
 class UserProfileData(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = '__all__'
+
+
 
 class CustomUserDetailsSerializer(UserDetailsSerializer):
     profile = UserProfileData(source='user_profile_data', many=False)
