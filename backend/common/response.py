@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 
+
 def ResponseGenerator(data, status, is_valid=None, message=None, errors=None):
 
     data.update({

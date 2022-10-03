@@ -1,15 +1,13 @@
 from django.db import models
 from django.db.models import CASCADE
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
-    # We don't need to define the email attribute because is inherited from AbstractUser
     phone = models.CharField(max_length=30)
     otp = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     mobile_verified = models.BooleanField(default=False)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=CASCADE, related_name='user_profile_data')

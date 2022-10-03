@@ -7,6 +7,8 @@ PRIVACY_CHOICE = (
     ('public', 'Public'),
     ('only_me', 'Only Me'),
 )
+
+
 class WebsitesData(models.Model):
     user = models.ForeignKey(CustomUser,  on_delete=CASCADE, related_name='user_website_data')
     website_url = models.URLField(max_length = 200, null=True, blank=True,)

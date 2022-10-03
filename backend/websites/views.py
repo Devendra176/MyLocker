@@ -1,12 +1,11 @@
-
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 
-from .models import WebsitesData
+from backend.websites.models import WebsitesData
 
-from .serializers import ActiveUserSerializer, WebsitesAddDataSerializers
+from backend.websites.serializers import ActiveUserSerializer, WebsitesAddDataSerializers
 
 
 class WebsitesDataView(generics.RetrieveUpdateAPIView):
