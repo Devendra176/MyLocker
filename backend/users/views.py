@@ -1,23 +1,16 @@
-from email import message
 import random
 
 from django.contrib.auth import login
 
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from users.models import CustomUser
 
+from users.models import CustomUser
 from users.serializers import PhoneRegisterSerializer, OtpVerificationSerializer
 from common.response import ResponseGenerator
 
-
-
-
-# Create your views here.
 
 
 class RegisterViaPhoneView(generics.CreateAPIView):
@@ -46,6 +39,8 @@ class RegisterViaPhoneView(generics.CreateAPIView):
             message = 'Succeess'
         
         return ResponseGenerator(data=data, status=status_code, is_valid=is_valid, message=message, errors=serializer.errors)
+
+
 
 class OtpVerificationView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
